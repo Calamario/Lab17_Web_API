@@ -21,6 +21,10 @@ namespace TodoApi.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// gets all items as a list
+        /// </summary>
+        /// <returns>list of items</returns>
         // GET: api/<controller>
         [HttpGet]
         public ActionResult<List<TodoItem>> GetAll()
@@ -28,6 +32,11 @@ namespace TodoApi.Controllers
             return Ok(_context.TodoItems.ToList());
         }
 
+        /// <summary>
+        /// returns a single item
+        /// </summary>
+        /// <param name="id">int id for one item</param>
+        /// <returns>todoitem</returns>
         // GET api/<controller>/5
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<TodoItem> GetById(int id)
@@ -41,6 +50,12 @@ namespace TodoApi.Controllers
             return Ok(item);
         }
 
+
+        /// <summary>
+        /// creates a todo item and stores it in the deployed db
+        /// </summary>
+        /// <param name="item">todoitem</param>
+        /// <returns>the item created</returns>
         // POST api/<controller>
         [HttpPost]
         public IActionResult Create(TodoItem item)
@@ -51,6 +66,12 @@ namespace TodoApi.Controllers
             return CreatedAtRoute("GetTodo", new { id = item.ID }, item);
         }
 
+        /// <summary>
+        /// update an existing item
+        /// </summary>
+        /// <param name="id">int id to specify single item</param>
+        /// <param name="item">teh new item information to replace old</param>
+        /// <returns>nocontent</returns>
         // PUT api/<controller>/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, TodoItem item)
@@ -70,6 +91,11 @@ namespace TodoApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// deletes a single item
+        /// </summary>
+        /// <param name="id">int id of a single item</param>
+        /// <returns>nocontent</returns>
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

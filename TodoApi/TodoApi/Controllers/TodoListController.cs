@@ -20,6 +20,10 @@ namespace TodoApi.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// returns all lists in a list
+        /// </summary>
+        /// <returns>list of list</returns>
         // GET: api/<controller>
         [HttpGet]
         public ActionResult<List<TodoList>> GetAll()
@@ -27,6 +31,11 @@ namespace TodoApi.Controllers
             return _context.TodoLists.ToList();
         }
 
+        /// <summary>
+        /// returns a single list
+        /// </summary>
+        /// <param name="id">an int id to specify single list</param>
+        /// <returns>found list or notfound</returns>
         // GET api/<controller>/5
         [HttpGet("{id}", Name = "GetToDoList")]
         public ActionResult<TodoList> Get([FromRoute]int id)
@@ -41,6 +50,12 @@ namespace TodoApi.Controllers
             return Ok(list);
         }
 
+        /// <summary>
+        /// update single list
+        /// </summary>
+        /// <param name="id">int id to specify single list</param>
+        /// <param name="newList">new list information to replace</param>
+        /// <returns>no content</returns>
         //Put api/<controller>/5
         [HttpPut("{id}")]
         public IActionResult Update(int id , TodoList newList)
@@ -58,6 +73,11 @@ namespace TodoApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// create new list into DB
+        /// </summary>
+        /// <param name="list">new list information</param>
+        /// <returns>the new list created</returns>
         // POST api/<controller>
         [HttpPost]
         public IActionResult Create(TodoList list)
@@ -68,6 +88,12 @@ namespace TodoApi.Controllers
             return CreatedAtRoute("GetToDoList", new { id = list.ID }, list);
         }
 
+
+        /// <summary>
+        /// deletes a single list and all its items
+        /// </summary>
+        /// <param name="id">the int id of the list</param>
+        /// <returns>nocontent</returns>
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
